@@ -66,6 +66,18 @@ IP=10.10.0.4 # Set ip from mask 10.10.0.2/24, ip 10.10.0.1/32 this interface wgo
 mkdir -p /root/wireguard/${CLIENT} # where will be stored .conf pubkey and secret_key your user
 ```
 
+8. Only route specific traffic through the VPN
+```bash
+nano add_user_script.sh
+[Peer]
+AllowedIPs = 10.10.0.0/24 # indicate our vpn network
+```
+
+9. Install Wireguard Dashboard
+```bash
+
+```
+
 ## OpenVPN Installation
 1. Infrastructure preparation PKI (Easy-RSA)
 ```bash
@@ -112,7 +124,10 @@ tls-crypt ta.key
 server 10.8.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 
-push "redirect-gateway def1 bypass-dhcp"
+# We can specify that all traffic goes through VPN or only the VPN network.
+push "route 10.8.0.0 255.255.255.0"
+# push "redirect-gateway def1 bypass-dhcp"
+
 push "dhcp-option DNS 8.8.8.8"
 push "dhcp-option DNS 1.1.1.1"
 # if you install Pi-hole
