@@ -185,6 +185,17 @@ sudo systemctl enable openvpn-server@server
 sudo systemctl restart openvpn-server@server
 ```
 
+5. Add user
+```bash
+cp create_user.sh del_user_cert.sh ~/openvpn-ca
+cd ~/openvpn-ca
+chmod +x create_user.sh
+chmod +x del_user_cert.sh
+./create_user.sh <username> # create <username>.ovpn
+./del_user_cert.sh <username>
+```
+
+
 ## Pi-hole install
 1. Install
 ```bash
