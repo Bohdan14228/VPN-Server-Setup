@@ -75,8 +75,11 @@ AllowedIPs = 10.10.0.0/24 # indicate our vpn network
 
 9. Install Wireguard Dashboard
 ```bash
-
+sudo iptables -A INPUT -p tcp --dport 10086 -j ACCEPT
+docker-compose up -d 
 ```
+Login: admin
+Pass: admin
 
 ## OpenVPN Installation
 1. Infrastructure preparation PKI (Easy-RSA)
