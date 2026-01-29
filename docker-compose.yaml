@@ -1,0 +1,17 @@
+services:
+  wgdashboard:
+    image: ghcr.io/wgdashboard/wgdashboard:latest
+    restart: unless-stopped
+    container_name: wgdashboard
+    ports:
+      - 10086:10086/tcp
+    volumes:
+      - aconf:/etc/amnezia/amneziawg
+      - /etc/wireguard:/etc/wireguard # <-- ВАЖНО: примонтируй системную папку
+      - data:/data
+    cap_add:
+      - NET_ADMIN
+volumes:
+  aconf:
+  conf:
+  data:
